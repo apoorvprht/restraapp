@@ -1,0 +1,99 @@
+<%= @hash["city"] %><%= request.remote_ip %>
+<style>
+      html, body, #map-canvas {
+        height: 500px;
+        margin: 0px;
+        padding: 0px
+      }
+      .display
+      {
+      	display: none;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+function initialize() {
+  var myLatlng = new google.maps.LatLng(<%= @hash["lat"] %>,<%= @hash["lon"] %>);
+  var mapOptions = {
+    zoom: 4,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+<div id="map-canvas" class="pull-left col-md-6"></div>
+<div  class="pull-right col-md-6">
+	<div id="type"><%= select_tag "selec_type", options_for_select([ ["Mcdonald's","Mcdonald's"], ["supermacs","supermacs" ]]), prompt: "Select something", :onchange=>"show_bellow();" %></div>
+	<div class="display" id="city">	<%= select_tag "select_city", options_for_select(@cities), prompt: "Select City", :onchange=>"show_image();" %></div>
+	<div class="display" id="image" ><img id="display_image"  width="500px" src="/assets/city/Kolhapur.jpg"></div>
+	<div class="display" id="button" class="bs-example" style="margin-top:20px">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary">
+            <input type="checkbox">  101
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  102
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  103
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  104
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  105
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  106
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  107
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  108
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  109
+        </label>
+        <label class="btn btn-primary">
+            <input type="checkbox">  110
+        </label>
+    </div>
+    <div class="col-md-12" style="margin-top:20px">
+    <button onclick="redirect_page()" type="button" class="btn btn-default">Submit</button></div>
+</div>
+</div>
+<script type="text/javascript">
+function show_image()
+{
+	document.getElementById("display_image").src='/assets/city/'+$("#select_city").val()+'.jpg'
+	// $("#image").innerhtml='<img width="500px" src="/assets/city/'+$("#select_city").val()+'.jpg">';
+	
+	$("#image")[0].style.display="block";
+	$("#button")[0].style.display="block";
+	
+}
+function redirect_page()
+{
+  alert(" Booking is done  ");
+  window.location.assign("/");
+}
+	function show_bellow()
+	{
+	
+		$("#city")[0].style.display="block";
+		$("#image")[0].style.display="none";
+		$("#button")[0].style.display="none";
+
+	
+}
+</script>
