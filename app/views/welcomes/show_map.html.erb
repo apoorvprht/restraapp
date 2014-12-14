@@ -33,7 +33,50 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="map-canvas" class="pull-left col-md-6"></div>
 <div  class="pull-right col-md-6">
 	<div id="type"><%= select_tag "selec_type", options_for_select([ ["Mcdonald's","Mcdonald's"], ["supermacs","supermacs" ]]), prompt: "Select something", :onchange=>"show_bellow();" %></div>
-	<div class="display" id="city">	<%= select_tag "select_city", options_for_select(@cities), prompt: "Select City", :onchange=>"show_image();" %></div>
+
+
+   <div class="prodselectbox">
+    <div class="floatleft cat">Country</div>
+    <div class="floatleft catid">
+        <select id="selectcat" name="categoryselected" onchange="show_bellow();">
+            <option value="" class="rhth">Select Country</option>
+            <option class="edibles" value="Edible Oils" id="selectionone">Ireland</option>
+            <option class="vegfats" value="Vegetable Cooking Fats" id="selectiontwo">Japan</option>
+            <option class='bak' value="Baking" id="selectionfive">China</option>
+           
+        </select>
+    </div>
+
+
+    <div class="floatleft artid">City</div>
+    <div class="floatleft selectarticle"  id="city">
+        <select id="selectprod" name="articleID", onchange="show_image();">
+            <option value="" class="rhth23">Select City</option>
+            <option value="elianto" class="selectors edibles">Dublin</option>
+            <option value="ufuta" class="selectors edibles">Cork</option>
+            <option value="bahari-fry" class="selectors edibles">Galway</option>
+            
+            <option value="chipo-pus-3" class="selectors vegfats">Biejing</option>
+            <option value="cowboy" class="selectors vegfats">Taipei</option>
+            <option value="kimbo" class="selectors vegfats">Shangai</option>
+           
+            <option value="pure-natural-active-man" class="selectors percare">Pure & Natural Active-Man</option>
+            <option value="pure-natural-beauty-soap" class="selectors percare">Pure & Natural Beauty Soap</option>
+            <option value="biddy" class="selectors marga">Biddy&#39;s</option>
+            <option value="gold-band-margarine" class="selectors marga">Gold Band Margarine</option>
+            <option value="veebol-pastry" class="selectors marga">Veebool Pastry</option>
+            <option value="bake-rite" class="selectors bak">Beijing</option>
+            <option value="mariandazi" class="selectors bak">Taipei</option>
+            <option value="mariandazi" class="selectors bak">Shangai</option>
+            
+        </select>
+    </div>
+
+
+
+
+
+
 	<div class="display" id="image" ><img id="display_image"  width="500px" src="/assets/city/Kolhapur.jpg"></div>
 	<div class="display" id="button" class="bs-example" style="margin-top:20px">
     <div class="btn-group" data-toggle="buttons">
@@ -68,7 +111,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
             <input type="checkbox">  110
         </label>
     </div>
-    <%= show_simple_captcha %>
     <div class="col-md-12" style="margin-top:20px">
     <button onclick="redirect_page()" type="button" class="btn btn-default">Submit</button></div>
 </div>
@@ -97,4 +139,15 @@ function redirect_page()
 
 	
 }
+$(document).ready(function () {    
+    var allOptions = $('#selectprod option')
+    $('#selectcat').change(function () {
+        $('#selectprod option').remove()
+        var classN = $('#selectcat option:selected').prop('class');
+        var opts = allOptions.filter('.' + classN);
+        $.each(opts, function (i, j) {
+            $(j).appendTo('#selectprod');
+        });
+    });
+});
 </script>
