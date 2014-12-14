@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 	def create
 		t_user = TwitterUser.from_omniauth(auth_hash)
 		session[:t_user_id] = t_user.id
-		redirect_to hotels_path, notice: "You have successfully Signed In"
+		redirect_to show_map_path, notice: "You have successfully Signed In"
 	end
 
 	def destroy

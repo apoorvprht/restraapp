@@ -22,13 +22,20 @@
      
        <li> Signed in as <%= current_admin.email %></li>
       <li><%= link_to "Sign Out",  destroy_admin_session_path, :method => :delete %></li>
-            <li><%= link_to "Go For Restaurants", "/show_map" %></li>     
+            <li><%= link_to "Go For Restaurants", "/show_map" %></li> 
+        <% elsif current_user %>
+          <ul class="nav navbar-nav navbar-right">
+       <li> Signed in as <%= current_user.name %></li>
+       <li> <%= link_to "Sign Out", signout_path %></li></ul>    
       <% else %>
        <li><%= link_to "Sign In", new_admin_session_path %></li>     
 
         <li><%= link_to "Registration", new_admin_registration_path %></li>
      <li><%= link_to "Login With Twitter", "/auth/twitter" %></li>
       <% end %>
+
+      
+      <%# end %>
 
         
       </ul>

@@ -1,6 +1,6 @@
 class WelcomesController < ApplicationController
 	require 'open-uri'
-	before_filter :authenticate_admin!,:only=>[:show_map]
+	#before_filter :authenticate_admin!,:only=>[:show_map]
   def welcome
   end
   def show_map
